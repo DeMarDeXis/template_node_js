@@ -1,0 +1,26 @@
+version: '3'
+tasks:
+  Dockerfile-Build:
+    aliases:
+      - dbuild
+    desc: "Build custom image from Dockerfile"
+    cmds:
+      - docker build -t custom-react-app .
+
+  Docker-Compose-Up:
+    aliases:
+      - dcu
+    desc: "Run docker-compose up"
+    cmds:
+      - docker-compose up -d
+
+  customrunner:
+    aliases:
+      - cr
+    desc: "Run custom runner"
+    cmds:
+      - echo "Running custom runner"
+      - timeout /t 5 /nobreak
+      - echo "Docker start or Init new container"
+      - docker start react-dev || docker run -dp 5173:5173 -v $(pwd):/app -v /app/node_modules --name node-app custom-react-app
+      - echo "Success! You can now access your React app at http://localhost:5173 (I guess:/)"
