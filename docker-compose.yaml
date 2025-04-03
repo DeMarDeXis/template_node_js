@@ -1,7 +1,12 @@
 version: '3.8'
 services:
   node-app:
-    build: .
+#    build: .
+#    image: custom-react-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: custom-react-app
     ports:
       - "5173:5173"
     volumes:
